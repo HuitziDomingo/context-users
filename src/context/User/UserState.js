@@ -24,17 +24,18 @@ const UserState = (props) => {
     const getProfile = async (id) => {
         let res = await fetch('https://reqres.in/api/users/' + id)
             .then(res => res.json())
-
-        dispatch({
-            type: 'GET_PROFILE',
-            payload: res.data.data
-        })
+            .then(data => {
+                dispatch({
+                    type: 'GET_PROFILE',
+                    payload: data.data
+                })
+            })
     }
 
     return (
         <UserContext.Provider value={{
             users: state.users,
-            selectedUser: state.selectedUsers,
+            selectedUser: state.selectedUser,
             getUsers,
             getProfile,
         }}>

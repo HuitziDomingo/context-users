@@ -3,7 +3,7 @@ import UserContext from '../context/User/UserContext'
 
 const UserList = () => {
 
-    const { getUsers, users } = useContext(UserContext)
+    const { getUsers, users, getProfile } = useContext(UserContext)
 
     useEffect(() => {
         getUsers()
@@ -13,7 +13,12 @@ const UserList = () => {
         <div className="list-group h-100">
             {
                 users.map(user => (
-                    <a href="">{`${user.first_name} ${user.last_name}`}</a>
+                    <a className="list-group-item list-group-item-action d-flex" href="#" key={user.id} onClick={() => getProfile(user.id)}>
+                        <img src={user.avatar} alt="perfil" className="img-fluid mr-4 rounded-circle" width="70" />
+                        <p>
+                            {`${user.first_name} ${user.last_name}`}
+                        </p>
+                    </a>
                 ))
             }
         </div>
